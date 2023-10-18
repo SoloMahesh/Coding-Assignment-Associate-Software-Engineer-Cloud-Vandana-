@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey form</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <center>
+    <h1>Survey form</h1>
+    <form id="myForm" method="post">
+        <input type="text" id="firstname" name="firstname" placeholder="First name" required><br><br>
+        <input type="text" id="lastname" name="lastname" placeholder="Last name" required><br><br>
+        <input type="date" id="dob" name="dob" placeholder="DOB" required><br><br>
+        <label >Country</label><br>
+            <select id="country" name="country" class="form-control" title="country" required>
+                <option value="India">India</option>
+                <option value="US">US</option>
+                <option value="UK">UK</option>
+            </select> <br><br>
+        <label>Gender</label>
+        <div class="cbrl">
+        <input class="cbr" type="radio" name="gender" value="Male" required> Male
+        <input class="cbr" type="radio" name="gender" value="Female" required> Female
+        <input class="cbr" type="radio" name="gender" value="Other" required> Other
+        </div>
+        <br>
+        <input type="text" id="profession" name="profession" placeholder="Profession" required><br><br>
+        <input type="email" id="email" name="email" placeholder="E-Mail" required><br><br>
+        <input type="number" id="mobile" name="mobile" placeholder="Mobile number" required><br><br>
+        <button type="button" onclick="showPopup()" class="cb">Submit</button>
+        <button type="reset" class="cb">Reset</button>
+    </form>
+</center>
+
+<!-- The popup element -->
+<div id="popup" class="popup">
+    <h2>Submitted Results:</h2>
+    <p id="resultDisplay"></p>
+ <!--   <button type="submit" class="cb">Submit</button><br> -->
+    <button type="reset" onclick="closePopup()" class="cb">Close</button>
+</div>
+
+<script>
+    // Function to show the popup with submitted results
+    function showPopup() {
+      const fn = document.getElementById("firstname").value;
+      const ln = document.getElementById("lastname").value;
+      const dob = document.getElementById("dob").value;
+      const country = document.getElementById("country").value;
+
+      const optionElements = document.getElementsByName("gender");
+      const selectedOption = Array.from(optionElements).find(e => e.checked);
+
+      const profession = document.getElementById("profession").value;
+      const email = document.getElementById("email").value;
+      const mobile = document.getElementById("mobile").value;
+      const resultDisplay = document.getElementById("resultDisplay");
+
+      resultDisplay.innerHTML = `<strong>First name:</strong> ${fn}<br>`;
+      resultDisplay.innerHTML += `<strong>Last name:</strong> ${ln}<br>`;
+      resultDisplay.innerHTML += `<strong>Date Of Birth:</strong> ${dob}<br>`;
+      resultDisplay.innerHTML += `<strong>Country:</strong> ${country}<br>`;
+      resultDisplay.innerHTML += `<strong>Gender:</strong> ${selectedOption.value}<br>`;
+      resultDisplay.innerHTML += `<strong>Profession:</strong> ${profession}<br>`;
+      resultDisplay.innerHTML += `<strong>E-Mail:</strong> ${email}<br>`;
+      resultDisplay.innerHTML += `<strong>Mobile:</strong> ${mobile}<br>`;
+
+
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+    }
+
+    // Function to close the popup
+    function closePopup() {
+      const popup = document.getElementById("popup");
+      popup.style.display = "none";
+      const form = document.getElementById("myForm");
+      form.reset();
+    }
+  </script>
+
+</body>
+</html>
